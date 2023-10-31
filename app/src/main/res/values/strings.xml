@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Loggy</string>
+    <string name="hint">Type Here</string>
+    <string name="urgent">Urgent</string>
+    <string name="add">ADD</string>
+    <string name="delete">Do You Want to Delete This?</string>
+    <string name="selectRow">The Selected Row is</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="deleted">List item has been deleted</string>
+</resources>
