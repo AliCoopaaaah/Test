@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         getStarWars starWars = new getStarWars();
         starWars.execute();//order 66
+
         adapter.notifyDataSetChanged();
     }//onCreate
 
@@ -142,12 +143,10 @@ public class MainActivity extends AppCompatActivity {
     }//URLConnection
 
 
-    class getStarWars extends AsyncTask<String, String, SWCharacter > {
-
+    class getStarWars extends AsyncTask<String, String, ArrayList<SWCharacter> > {
         private SWCharacter character;
-
         @Override
-        protected SWCharacter  doInBackground(String... strings) {
+        protected ArrayList<SWCharacter>  doInBackground(String... strings) {
 
             try {
                 URLConnection();
@@ -172,9 +171,9 @@ public class MainActivity extends AppCompatActivity {
                     //character.setHeight(jsonObject.getString("height"));
                     //character.setMass(jsonObject.getString("mass"));
 
-                    list.add(character);
+
                 }
-                return character;
+                return list;
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -185,8 +184,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
+        protected void onPostExecute(ArrayList<SWCharacter> swCharacters) {
+            super.onPostExecute(swCharacters);
+            list.add(character);
         }
     }//getStarWars
 }
