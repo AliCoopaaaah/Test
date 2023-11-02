@@ -3,6 +3,9 @@ package com.example.test;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -31,6 +35,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -55,12 +60,13 @@ public class MainActivity extends AppCompatActivity {
         adapter = new myAdapter(this, list);
         lv.setAdapter(adapter);
 
+        //use getStarWars to get character information from url
         getStarWars starWars = new getStarWars();
         starWars.execute();//order 66
-        adapter.notifyDataSetChanged();
+
     }//onCreate
 
-    class SWCharacter {
+    class SWCharacter implements Serializable {
         private String name;
         private String height;
         private String mass;
@@ -140,10 +146,14 @@ public class MainActivity extends AppCompatActivity {
             SWCharacter thisCharacter = (SWCharacter) getItem(position);
             String name = thisCharacter.getName();
 
-            TextView tv = newView.findViewById(R.id.textview);
+            TextView tv = newView.findViewById(R.id.character);
             tv.setText(name);
 
             return newView;
+        }
+
+        public ArrayList<SWCharacter> getArrayList() {
+            return list;
         }
     }//myAdapter
 
@@ -157,12 +167,12 @@ public class MainActivity extends AppCompatActivity {
     }//URLConnection
 
 
-    class getStarWars extends AsyncTask<String, String, SWCharacter > {
+    class getStarWars extends AsyncTask<String, String, ArrayList<SWCharacter>> {
 
         private SWCharacter character;
 
         @Override
-        protected SWCharacter  doInBackground(String... strings) {
+        protected ArrayList<SWCharacter> doInBackground(String... strings) {
 
             try {
                 URLConnection();
@@ -184,12 +194,12 @@ public class MainActivity extends AppCompatActivity {
                     character = new SWCharacter();
 
                     character.setName(jsonObject.getString("name"));
-                    //character.setHeight(jsonObject.getString("height"));
-                    //character.setMass(jsonObject.getString("mass"));
+                    character.setHeight(jsonObject.getString("height"));
+                    character.setMass(jsonObject.getString("mass"));
 
                     list.add(character);
                 }
-                return character;
+                return list;
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -200,8 +210,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
+        protected void onPostExecute(ArrayList<SWCharacter> swCharacters) {
+            super.onPostExecute(swCharacters);
+            adapter.notifyDataSetChanged();
         }
-    }//getStarWars
+    }//getStarWars}
 }
