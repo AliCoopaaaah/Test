@@ -1,192 +1,41 @@
 package com.example.test;
 
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
-import android.os.AsyncTask;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
+import android.widget.Button;
+
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<SWCharacter> list;
-    ListView lv;
-    myAdapter adapter;
-    InputStream input;
+    TestObject test = new TestObject();
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lv = (ListView) findViewById(R.id.listview);
+        button = (Button) findViewById(R.id.button);
+        test.setWords("Hello");
 
-        list = new ArrayList<>();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        //adapter set up
-        adapter = new myAdapter(this, list);
-        lv.setAdapter(adapter);
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
 
-        getStarWars starWars = new getStarWars();
-        starWars.execute();//order 66
+                Bundle bundle = new Bundle();
+                String myWords = test.getWords();
+                bundle.putString("key ", "myWords");
 
-        adapter.notifyDataSetChanged();
+                DetailsFragment detailsFragment = new DetailsFragment();
+                detailsFragment.setArguments(bundle);
+                transaction.replace(R.id.frame, detailsFragment).commit();
+            }
+        });
     }//onCreate
-
-    class SWCharacter {
-        private String name;
-        private String height;
-        private String mass;
-
-        //constructors
-        public SWCharacter() {
-        }
-
-        public SWCharacter(String name, String height, String mass) {
-            this.name = name;
-            this.height = height;
-            this.mass = mass;
-        }
-
-        //setters
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setHeight(String height) {
-            this.height = height;
-        }
-
-        public void setMass(String mass) {
-            this.mass = mass;
-        }
-
-        //getters
-        public String getName() {
-            return name;
-        }
-
-        public String getHeight() {
-            return height;
-        }
-
-        public String getMass() {
-            return mass;
-        }
-    }//SWCharacter
-
-    class myAdapter extends BaseAdapter {
-        Context context;
-        ArrayList<SWCharacter> thisList;
-
-        public myAdapter(Context context, ArrayList<SWCharacter> thisList) {
-            this.context = context;
-            this.thisList = thisList;
-        }
-
-        @Override
-        public int getCount() {
-            return thisList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return thisList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return (long) position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            View newView = convertView;
-            LayoutInflater inflater = getLayoutInflater();
-
-            if (newView == null) {
-                newView = inflater.inflate(R.layout.characters, parent, false);
-            }
-
-            //get the character name from the list
-            SWCharacter thisCharacter = (SWCharacter) getItem(position);
-            String name = thisCharacter.getName();
-
-            TextView tv = newView.findViewById(R.id.textview);
-            tv.setText(name);
-
-            return newView;
-        }
-    }//myAdapter
-
-    public void URLConnection() throws IOException {
-        HttpURLConnection urlConnection;
-        String url = "https://swapi.dev/api/people/?format=json";
-        urlConnection = (HttpURLConnection) new URL(url).openConnection();
-        urlConnection.setDoInput(true);
-        urlConnection.connect();
-        input = urlConnection.getInputStream();
-    }//URLConnection
-
-
-    class getStarWars extends AsyncTask<String, String, ArrayList<SWCharacter> > {
-        private SWCharacter character;
-        @Override
-        protected ArrayList<SWCharacter>  doInBackground(String... strings) {
-
-            try {
-                URLConnection();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line);
-                }
-
-                String streamResults = buffer.toString();
-
-                JSONObject json1 = new JSONObject(streamResults);
-                JSONArray array1 = json1.getJSONArray("results");
-
-                for (int i = 0; i < array1.length(); i++) {
-                    JSONObject jsonObject = array1.getJSONObject(i);
-                    character = new SWCharacter();
-
-                    character.setName(jsonObject.getString("name"));
-                    //character.setHeight(jsonObject.getString("height"));
-                    //character.setMass(jsonObject.getString("mass"));
-
-
-                }
-                return list;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<SWCharacter> swCharacters) {
-            super.onPostExecute(swCharacters);
-            list.add(character);
-        }
-    }//getStarWars
 }
