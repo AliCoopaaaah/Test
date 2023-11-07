@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Loggy</string>
-    <string name="hint">Type Here</string>
-    <string name="urgent">Urgent</string>
-    <string name="add">ADD</string>
-    <string name="delete">Do You Want to Delete This?</string>
-    <string name="selectRow">The Selected Row is</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
-    <string name="deleted">List item has been deleted</string>
+    <string name="home">Home</string>
+    <string name="dad_joke">Dad Joke</string>
+    <string name="exit">Exit</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="dragon_name">Dragon</string>
+    <string name="dragon">GAAAAAAAAAAAAAAAAAAAAAH!</string>
+    <string name="duck_name">Duck!</string>
+    <string name="duck">QUACK!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
