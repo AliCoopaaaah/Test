@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame, new DadJoke());
             transaction.commit();
-
-            //loadFragment(joke);
-
         } else if (item.getItemId()==R.id.exit){
             message = "exit placeholder";
         }
@@ -59,15 +56,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return true;
     }
-/*
-    private void loadFragment(Fragment fragment){
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        transaction.replace(R.id.frame, fragment);
-        transaction.commit();
-    }
-
- */
 }
