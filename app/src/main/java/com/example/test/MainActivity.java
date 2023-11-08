@@ -2,18 +2,13 @@ package com.example.test;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
     }//onCreate
 
     @Override
@@ -37,37 +33,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        String message = null;
 
-        if(item.getItemId()==R.id.duck){
-            message = getResources().getString(R.string.duck);
-        } else if (item.getItemId()==R.id.dragon){
-            message = getResources().getString(R.string.dragon);
-        } else if (item.getItemId()==R.id.home){
-            message = "home placeholder";
-        } else if (item.getItemId()==R.id.dad_joke){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, new DadJoke());
+        DadJoke joke = new DadJoke();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        if(item.getItemId()==R.id.dad_joke){
+            transaction.replace(R.id.frame, joke);
+            transaction.addToBackStack(null);
             transaction.commit();
-
-            //loadFragment(joke);
-
+        } else if (item.getItemId()==R.id.dragon){
+            Toast.makeText(this, getResources().getString(R.string.dragon), Toast.LENGTH_SHORT).show();
+        } else if (item.getItemId()==R.id.duck){
+            Toast.makeText(this, getResources().getString(R.string.duck), Toast.LENGTH_SHORT).show();
+        } else if (item.getItemId()==R.id.home){
+            getSupportFragmentManager().popBackStackImmediate();
         } else if (item.getItemId()==R.id.exit){
-            message = "exit placeholder";
+            MainActivity.this.finish();
         }
-
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return true;
     }
-/*
-    private void loadFragment(Fragment fragment){
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        transaction.replace(R.id.frame, fragment);
-        transaction.commit();
-    }
-
- */
 }

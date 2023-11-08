@@ -6,9 +6,7 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="dragon_name">Dragon</string>
-    <string name="dragon">GAAAAAAAAAAAAAAAAAAAAAH!</string>
+    <string name="dragon">GRAAAAAAAAAAAAAAAAAAAAAH!</string>
     <string name="duck_name">Duck!</string>
     <string name="duck">QUACK!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
