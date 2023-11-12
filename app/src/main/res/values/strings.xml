@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dad Joke App</string>
+    <string name="app_name"></string>
     <string name="home">Home</string>
     <string name="dad_joke">Dad Joke</string>
     <string name="joke">How does a man on the moon cut his hair?</string>

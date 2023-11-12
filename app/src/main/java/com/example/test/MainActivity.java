@@ -1,15 +1,15 @@
 package com.example.test;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentTransaction;
+import android.widget.Button;
+import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,8 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ImageView icon = findViewById(R.id.icon);
+        icon.setImageResource(R.drawable.img);
 
+        Button friends = findViewById(R.id.friends);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
     }//onCreate
@@ -27,29 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }//onCreateOptionsMenu
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        DadJoke joke = new DadJoke();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        if(item.getItemId()==R.id.dad_joke){
-            transaction.replace(R.id.frame, joke);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        } else if (item.getItemId()==R.id.dragon){
-            Toast.makeText(this, getResources().getString(R.string.dragon), Toast.LENGTH_SHORT).show();
-        } else if (item.getItemId()==R.id.duck){
-            Toast.makeText(this, getResources().getString(R.string.duck), Toast.LENGTH_SHORT).show();
-        } else if (item.getItemId()==R.id.home){
-            getSupportFragmentManager().popBackStackImmediate();
-        } else if (item.getItemId()==R.id.exit){
-            MainActivity.this.finish();
-        }
+        inflater.inflate(R.menu.menu, menu);
         return true;
     }
 }
