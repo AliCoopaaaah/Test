@@ -5,9 +5,13 @@ package com.example.test;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ArrayAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FriendsList fl = new FriendsList();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fl);
+        transaction.commit();
 
         ActionMenuView topbar = findViewById(R.id.top_toolbar);
         Menu topMenu = topbar.getMenu();

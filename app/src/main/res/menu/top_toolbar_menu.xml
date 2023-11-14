@@ -12,7 +12,7 @@
         android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/img_4"
-        android:orderInCategory="200"
+        android:orderInCategory="300"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>
