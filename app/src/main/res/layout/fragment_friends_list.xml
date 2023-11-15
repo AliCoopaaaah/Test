@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/p1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="5dp"
         app:srcCompat="@drawable/img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,8 +41,8 @@
 
     <ImageView
         android:id="@+id/p2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/img"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -73,8 +73,8 @@
 
     <ImageView
         android:id="@+id/p3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/img"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -105,8 +105,8 @@
 
     <ImageView
         android:id="@+id/p4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/img"
         app:layout_constraintLeft_toLeftOf="parent"

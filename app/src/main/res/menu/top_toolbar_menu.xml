@@ -5,9 +5,10 @@
     <item
         android:id="@+id/icon"
         android:title="Icon"
-        android:icon="@drawable/img"
         android:orderInCategory="100"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        app:actionLayout="@layout/top_toolbar_item_layout"/>
+
     <item
         android:id="@+id/search"
         android:title="Search"
