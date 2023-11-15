@@ -1,13 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".FriendsList">
 
-    <ListView
-        android:id="@+id/friendslist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/p1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/f1"
+        android:text="Porcupuffer"
+        android:textSize="18dp"
+        android:textColor="@color/lightBlue"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/p1"
+        app:layout_constraintTop_toTopOf="@id/p1"/>
+
+        <TextView
+            android:id="@+id/s1"
+            android:text="Away"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/p1"
+            app:layout_constraintBottom_toBottomOf="@id/p1"/>
+
+    <ImageView
+        android:id="@+id/p2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p1"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/f2"
+        android:text="Bamevro"
+        android:textSize="18dp"
+        android:textColor="@color/lightBlue"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/p2"
+        app:layout_constraintTop_toTopOf="@+id/p2"/>
+
+        <TextView
+            android:id="@+id/s2"
+            android:text="Busy"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/p2"
+            app:layout_constraintBottom_toBottomOf="@+id/p2"/>
+
+    <ImageView
+        android:id="@+id/p3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p2"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/f3"
+        android:text="Cozi"
+        android:textSize="18dp"
+        android:textColor="@color/lightBlue"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/p3"
+        app:layout_constraintTop_toTopOf="@+id/p3"/>
+
+        <TextView
+            android:id="@+id/s3"
+            android:text="Offline"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/p3"
+            app:layout_constraintBottom_toBottomOf="@+id/p3"/>
+
+    <ImageView
+        android:id="@+id/p4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p3"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/f4"
+        android:text="Dunbar"
+        android:textSize="18dp"
+        android:textColor="@color/lightBlue"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/p4"
+        app:layout_constraintTop_toTopOf="@+id/p4"/>
+
+        <TextView
+            android:id="@+id/s4"
+            android:text="Offline for 1 year(s)"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/p4"
+            app:layout_constraintBottom_toBottomOf="@+id/p4"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

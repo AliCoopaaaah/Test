@@ -27,11 +27,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FriendsList fl = new FriendsList();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, fl);
-        transaction.commit();
-
         ActionMenuView topbar = findViewById(R.id.top_toolbar);
         Menu topMenu = topbar.getMenu();
         getMenuInflater().inflate(R.menu.top_toolbar_menu, topMenu);
@@ -39,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         ActionMenuView bottombar = findViewById(R.id.bottom_toolbar);
         Menu bottomMenu = bottombar.getMenu();
         getMenuInflater().inflate(R.menu.bottom_toolbar_menu, bottomMenu);
-
     }//onCreate
 
 

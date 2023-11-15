@@ -6,16 +6,19 @@
         android:id="@+id/friends"
         android:title="Friends"
         android:orderInCategory="200"
+        app:actionLayout="@layout/menu_item_layout"
         app:showAsAction="always"/>
     <item
         android:id="@+id/chats"
         android:title="Chats"
         android:orderInCategory="300"
+        app:actionLayout="@layout/menu_item_layout2"
         app:showAsAction="always"/>
     <item
         android:id="@+id/groups"
         android:title="Groups"
         android:orderInCategory="400"
+        app:actionLayout="@layout/menu_item_layout3"
         app:showAsAction="always"/>
 
 </menu>
