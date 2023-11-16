@@ -127,7 +127,7 @@
         <TextView
             android:id="@+id/s4"
             android:text="Offline for 1 year(s)"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textColor="@color/white"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"

@@ -21,16 +21,33 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/blue"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/top_toolbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="1dp"
+            android:background="@color/lightBlue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
         <fragment
             tools:layout="@layout/fragment_friends_list"
             android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:name="com.example.test.FriendsList"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
@@ -38,17 +55,28 @@
         <androidx.appcompat.widget.ActionMenuView
             android:id="@+id/bottom_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:background="@color/blue"
+            android:layout_marginBottom="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <TextView
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_toolbar"/>
+
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_toolbar"
+            app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintRight_toRightOf="parent"
             app:srcCompat="@drawable/img_6"/>
 
