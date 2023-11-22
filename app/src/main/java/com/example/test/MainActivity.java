@@ -1,11 +1,14 @@
 package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 
 import org.json.JSONException;
@@ -19,6 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+    Toolbar toolbar;
     ImageView image;
     Bitmap bitmap;
     InputStream input1;
@@ -29,13 +33,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         image = findViewById(R.id.image);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
         NASAImages nasa = new NASAImages();
         nasa.execute();
     }//onCreate
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }//onCreateOptionsMenu
+
     public void URLConnection() throws IOException {
         HttpURLConnection connection;
-        String url = "https://api.nasa.gov/planetary/apod?api_key=hm97X7cDaP9hZN1E1oGdbS7QVSJbI3W4jdzTzKva";
+        //change the date to a date variable
+        String url = "https://api.nasa.gov/planetary/apod?api_key=hm97X7cDaP9hZN1E1oGdbS7QVSJbI3W4jdzTzKva&date=2020-02-01";
         connection = (HttpURLConnection) new URL(url).openConnection();
         connection.connect();
         input1 = connection.getInputStream();
@@ -58,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 json = reader.readLine();
                 jsonObject = new JSONObject(json);
                 urlValue = new URL(jsonObject.getString("url"));
-
                 connection = (HttpURLConnection) urlValue.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
