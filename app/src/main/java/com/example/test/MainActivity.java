@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -39,15 +40,17 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     ImageView image;
     Bitmap bitmap;
-
     InputStream input1;
-    private ArrayList list;
 
     //dates to be appended to the URL
     int URLyear = 1996;
     int URLmonth = 3;
     int URLday = 25;
     String URLdate;
+
+    //ArrayList and String variables to be sent between activities
+    String savedURL;
+    private ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
 
-
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         MainActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -87,9 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-/*
 
-*/
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,9 +98,29 @@ public class MainActivity extends AppCompatActivity {
                 nasa.execute();
             }
         });
+
+        Button newActivity = (Button) findViewById(R.id.test);
+        Button save = (Button) findViewById(R.id.save);
+        newActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FavouritesList.class);
+                intent.putExtra("list", list);
+                startActivity(intent);
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //adds the current string value of a URL to list
+                list.add(savedURL);
+            }
+        });
     }//onCreate
 
     //-------------------------Saved Instances-------------------------
+    /*
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList("list", list);
@@ -112,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
     }
-
+    */
     //-------------------------Menu Options-------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
+        if(item.getItemId()==R.id.savedImages){
+        }
         return true;
     }//onOptionsItemSelected
 
@@ -159,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
                 connection.connect();
                 input2 = connection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(input2);
+
+                savedURL = urlValue.toString();
             } catch(MalformedURLException e){
                 throw new RuntimeException(e);
             } catch (IOException e){
@@ -175,6 +198,22 @@ public class MainActivity extends AppCompatActivity {
             if(image != null){
                 image.setImageBitmap(bitmap);
             }
+        }
+        public void setImage(){
+            try {
+                urlValue = new URL(savedURL);
+                connection = (HttpURLConnection) urlValue.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                input2 = connection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(input2);
+
+            } catch (MalformedURLException e){
+                e.printStackTrace();
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
+            image.setImageBitmap(bitmap);
         }
     }//NASAImages
 }
