@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     //ArrayList and String variables to be sent between activities
     String savedURL;
-    private ArrayList<String> list;
+    String hdURL;
+    NasaObject object;
+    private ArrayList<NasaObject> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         Button dateButton = (Button) findViewById(R.id.dateButton);
         Button show = (Button) findViewById(R.id.show);
         image = (ImageView) findViewById(R.id.image);
+
+        list = new ArrayList<>();
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,13 +119,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //adds the current string value of a URL to list
-                list.add(savedURL);
+                URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
+                hdURL = "FSGAFHJAOFWefkpeaerp";
+                object = new NasaObject(hdURL, URLdate);
+                list.add(object);
+                Toast.makeText(MainActivity.this, "Image Link Saved to Favourites", Toast.LENGTH_SHORT).show();
             }
         });
     }//onCreate
 
     //-------------------------Saved Instances-------------------------
-    /*
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList("list", list);
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
     }
-    */
+
     //-------------------------Menu Options-------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -198,22 +206,6 @@ public class MainActivity extends AppCompatActivity {
             if(image != null){
                 image.setImageBitmap(bitmap);
             }
-        }
-        public void setImage(){
-            try {
-                urlValue = new URL(savedURL);
-                connection = (HttpURLConnection) urlValue.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                input2 = connection.getInputStream();
-                bitmap = BitmapFactory.decodeStream(input2);
-
-            } catch (MalformedURLException e){
-                e.printStackTrace();
-            } catch (IOException e){
-                throw new RuntimeException(e);
-            }
-            image.setImageBitmap(bitmap);
         }
     }//NASAImages
 }
