@@ -3,14 +3,16 @@ package com.example.test;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -24,6 +26,10 @@ public class FavouritesList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         setContentView(R.layout.activity_favourites_list);
         listView = (ListView) findViewById(R.id.listview);
         list = getIntent().getParcelableArrayListExtra("list");
@@ -32,6 +38,22 @@ public class FavouritesList extends AppCompatActivity {
         listView.setAdapter(adapter);
     }//onCreate
 
+    //-------------------------Menu Options-------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }//onCreateOptionsMenu
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.savedImages){
+        }
+        return true;
+    }//onOptionsItemSelected
+
+    //-------------------------Adapter-------------------------
     class MyAdapter extends BaseAdapter {
         Context context;
         ArrayList<NasaObject> list;
