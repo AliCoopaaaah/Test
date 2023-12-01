@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class FavouritesList extends AppCompatActivity {
+public class FavouritesList extends MenuOptions{
     ArrayList<NasaObject> list;
     ListView listView;
     String date;
@@ -37,21 +37,6 @@ public class FavouritesList extends AppCompatActivity {
         MyAdapter adapter = new MyAdapter(this, list);
         listView.setAdapter(adapter);
     }//onCreate
-
-    //-------------------------Menu Options-------------------------
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }//onCreateOptionsMenu
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.savedImages){
-        }
-        return true;
-    }//onOptionsItemSelected
 
     //-------------------------Adapter-------------------------
     class MyAdapter extends BaseAdapter {

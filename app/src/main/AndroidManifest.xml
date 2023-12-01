@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingLeanbackLauncher" >
+    tools:ignore="MissingLeanbackLauncher">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,7 +20,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".ToolbarOptions"
+            android:exported="false" />
+        <activity
+            android:name=".MenuOptions"
+            android:exported="false" />
         <activity
             android:name=".FavouritesList"
             android:exported="false"
@@ -28,7 +34,7 @@
             android:theme="@style/Theme.Test" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

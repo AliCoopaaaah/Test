@@ -31,7 +31,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MenuOptions {
     ImageView image;
     Bitmap bitmap;
     InputStream input1;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     String savedURL;
     String hdURL;
     NasaObject object;
-    private ArrayList<NasaObject> list;
+    protected ArrayList<NasaObject> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +59,12 @@ public class MainActivity extends AppCompatActivity {
         TextView datePicked = (TextView) findViewById(R.id.datePicked);
         Button dateButton = (Button) findViewById(R.id.dateButton);
         Button show = (Button) findViewById(R.id.show);
+        Button save = (Button) findViewById(R.id.save);
         image = (ImageView) findViewById(R.id.image);
 
         list = new ArrayList<>();
 
+        //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //show the image
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,17 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button newActivity = (Button) findViewById(R.id.test);
-        Button save = (Button) findViewById(R.id.save);
-        newActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FavouritesList.class);
-                intent.putExtra("list", list);
-                startActivity(intent);
-            }
-        });
-
+        //save URL to list of favourites
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,21 +126,6 @@ public class MainActivity extends AppCompatActivity {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
     }
-
-    //-------------------------Menu Options-------------------------
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }//onCreateOptionsMenu
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.savedImages){
-        }
-        return true;
-    }//onOptionsItemSelected
 
     //-------------------------URL Connection and AsyncTask-------------------------
     public void URLConnection() throws IOException {
