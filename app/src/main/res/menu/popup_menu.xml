@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/imageHelp"
+        android:title="How to View Image"
+        />
+    <item
+        android:id="@+id/saveTo"
+        android:title="How to Save to Favourites"
+        />
+    <item
+        android:id="@+id/viewlist"
+        android:title="How to View Favourites"
+        />
+</menu>

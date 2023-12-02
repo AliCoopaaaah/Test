@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -60,9 +61,11 @@ public class MainActivity extends MenuOptions {
         Button dateButton = (Button) findViewById(R.id.dateButton);
         Button show = (Button) findViewById(R.id.show);
         Button save = (Button) findViewById(R.id.save);
+        Button help = (Button) findViewById(R.id.help);
         image = (ImageView) findViewById(R.id.image);
 
         list = new ArrayList<>();
+        //DatabaseConnection connection = new DatabaseConnection(getApplicationContext());
 
         //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +107,38 @@ public class MainActivity extends MenuOptions {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 //adds the current string value of a URL to list
                 URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
                 hdURL = "FSGAFHJAOFWefkpeaerp";
                 object = new NasaObject(hdURL, URLdate);
                 list.add(object);
+
+                connection.onAddItem(URLdate, hdURL);
                 Toast.makeText(MainActivity.this, "Image Link Saved to Favourites", Toast.LENGTH_SHORT).show();
+                 */
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainActivity.this, help);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.imageHelp){
+                            Toast.makeText(MainActivity.this, "Pick a date and select the 'Show Image' button to view an image", Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.saveTo) {
+                            Toast.makeText(MainActivity.this, "Select the 'Save URL' button to save image to favourites", Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.viewlist){
+                            Toast.makeText(MainActivity.this, "Select the 'Favourites List' (Stars Icon) option from the toolbar to view a list of saved images", Toast.LENGTH_LONG).show();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
             }
         });
     }//onCreate
