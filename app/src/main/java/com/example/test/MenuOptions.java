@@ -21,9 +21,9 @@ public class MenuOptions extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.home){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         } else if (item.getItemId()==R.id.savedImages) {
-
+            startActivity(new Intent(this, FavouritesList.class));
         }
         return true;
     }//onOptionsItemSelected

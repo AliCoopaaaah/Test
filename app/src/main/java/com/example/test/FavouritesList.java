@@ -9,8 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,32 +22,54 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class FavouritesList extends MenuOptions{
-    ArrayList<NasaObject> list;
+    ArrayList<String> list;
     ListView listView;
-    String date;
-    String hdURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_favourites_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setContentView(R.layout.activity_favourites_list);
+        DatabaseConnection connection = new DatabaseConnection(FavouritesList.this);
+
         listView = (ListView) findViewById(R.id.listview);
-        list = getIntent().getParcelableArrayListExtra("list");
+        Button help = (Button) findViewById(R.id.help);
+
+        list = connection.getImageDate();
 
         MyAdapter adapter = new MyAdapter(this, list);
         listView.setAdapter(adapter);
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(FavouritesList.this, help);
+                popup.getMenuInflater().inflate(R.menu.popup_menu_favourites, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.viewImage){
+                            Toast.makeText(FavouritesList.this, "Select a date from the list to view the corresponding image", Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.home) {
+                            Toast.makeText(FavouritesList.this, "Select the 'HOME' button (spaceship icon) from the toolbar to return to the homepage", Toast.LENGTH_LONG).show();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
+            }
+        });
     }//onCreate
 
     //-------------------------Adapter-------------------------
     class MyAdapter extends BaseAdapter {
         Context context;
-        ArrayList<NasaObject> list;
+        ArrayList<String> list;
 
-        public MyAdapter(Context context, ArrayList<NasaObject> list) {
+        public MyAdapter(Context context, ArrayList<String> list) {
             this.context = context;
             this.list = list;
         }
@@ -71,7 +97,7 @@ public class FavouritesList extends MenuOptions{
             }
 
             TextView textView = (TextView) view.findViewById(R.id.textview);
-            textView.setText(list.get(i).getDate());
+            textView.setText(list.get(i));
 
             return view;
         }

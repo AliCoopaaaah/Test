@@ -45,9 +45,8 @@ public class MainActivity extends MenuOptions {
 
     //ArrayList and String variables to be sent between activities
     String savedURL;
-    String hdURL;
-    NasaObject object;
-    protected ArrayList<NasaObject> list;
+    String hdURL = "kgjsdfhskghjqa";
+    private ArrayList<NasaObject> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class MainActivity extends MenuOptions {
         image = (ImageView) findViewById(R.id.image);
 
         list = new ArrayList<>();
-        //DatabaseConnection connection = new DatabaseConnection(getApplicationContext());
 
         //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -107,19 +105,13 @@ public class MainActivity extends MenuOptions {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                //adds the current string value of a URL to list
-                URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
-                hdURL = "FSGAFHJAOFWefkpeaerp";
-                object = new NasaObject(hdURL, URLdate);
-                list.add(object);
-
-                connection.onAddItem(URLdate, hdURL);
-                Toast.makeText(MainActivity.this, "Image Link Saved to Favourites", Toast.LENGTH_SHORT).show();
-                 */
+                DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
+                connection.addImage(URLdate, hdURL);
+                Toast.makeText(MainActivity.this, "URL Saved to Favourites", Toast.LENGTH_SHORT).show();
             }
         });
 
+        //help menu
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
