@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,7 +41,7 @@ public class FavouritesList extends MenuOptions{
 
         list = connection.getImageDate();
 
-        MyAdapter adapter = new MyAdapter(this, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(FavouritesList.this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
         help.setOnClickListener(new View.OnClickListener() {

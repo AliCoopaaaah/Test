@@ -4,4 +4,6 @@
     <string name="title_activity_favourites_list"></string>
     <string name="first_fragment_label"></string>
     <string name="second_fragment_label"></string>
+    <string name="nav_open">Open</string>
+    <string name="nav_closed">Closed</string>
 </resources>

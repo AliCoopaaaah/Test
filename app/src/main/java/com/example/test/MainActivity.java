@@ -2,8 +2,11 @@ package com.example.test;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -33,6 +36,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends MenuOptions {
+
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle toggle;
     ImageView image;
     Bitmap bitmap;
     InputStream input1;

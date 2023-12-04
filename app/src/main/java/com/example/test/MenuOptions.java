@@ -1,11 +1,13 @@
 package com.example.test;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,8 @@ public class MenuOptions extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         } else if (item.getItemId()==R.id.savedImages) {
             startActivity(new Intent(this, FavouritesList.class));
+        } else if (item.getItemId()==R.id.exit){
+            ActivityCompat.finishAffinity(this);
         }
         return true;
     }//onOptionsItemSelected

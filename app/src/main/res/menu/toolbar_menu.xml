@@ -15,9 +15,9 @@
         android:orderInCategory="200"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/help"
-        android:title="Help"
-        android:icon="@drawable/help"
+        android:id="@+id/exit"
+        android:title="Exit"
+        android:icon="@drawable/exit"
         android:orderInCategory="300"
         app:showAsAction="always"/>
 </menu>
