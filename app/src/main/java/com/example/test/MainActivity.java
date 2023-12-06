@@ -21,9 +21,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +44,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends MenuOptions implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MenuOptions{
     ImageView image;
     Bitmap bitmap;
     InputStream input1;
@@ -56,7 +58,8 @@ public class MainActivity extends MenuOptions implements NavigationView.OnNaviga
     //ArrayList and String variables to be sent between activities
     String savedURL;
     String hdURL = "kgjsdfhskghjqa";
-    private ArrayList<NasaObject> list;
+    ArrayList<NasaObject> list;
+    ArrayList<String> displayDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +69,6 @@ public class MainActivity extends MenuOptions implements NavigationView.OnNaviga
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawerlayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_closed);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigation = (NavigationView) findViewById(R.id.navigation);
-        navigation.setNavigationItemSelectedListener(this);
-
-
         TextView datePicked = (TextView) findViewById(R.id.datePicked);
         Button dateButton = (Button) findViewById(R.id.dateButton);
         Button show = (Button) findViewById(R.id.show);
@@ -83,6 +77,12 @@ public class MainActivity extends MenuOptions implements NavigationView.OnNaviga
         image = (ImageView) findViewById(R.id.image);
 
         list = new ArrayList<>();
+
+        displayDates = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, displayDates);
+
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
 
         //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +124,12 @@ public class MainActivity extends MenuOptions implements NavigationView.OnNaviga
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
-                connection.addImage(URLdate, hdURL);
+                //DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
+                //connection.addImage(URLdate, hdURL);
+
+                displayDates.add(URLdate);
+                adapter.notifyDataSetChanged();
+
                 Toast.makeText(MainActivity.this, "URL Saved to Favourites", Toast.LENGTH_SHORT).show();
             }
         });
@@ -166,41 +170,6 @@ public class MainActivity extends MenuOptions implements NavigationView.OnNaviga
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    //-------------------------Navigation Drawer-------------------------
-
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.test);{
-            Toast.makeText(MainActivity.this, "A", Toast.LENGTH_SHORT).show();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
-        drawer.closeDrawer(GravityCompat.START);
-        return false;
-    }//onNavigationItemSelected
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }//onBackPressed
-
-    //-------------------------Intent-------------------------
-
-    public void changeActivity(){
-        ArrayList<String> dates = new ArrayList<>();
-        DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
-        dates = connection.getImageDate();
-
-        Intent intent = new Intent(MainActivity.this, FavouritesList.class);
-        intent.putExtra("dates", dates);
-        startActivity(intent);
     }
 
     //-------------------------URL Connection and AsyncTask-------------------------

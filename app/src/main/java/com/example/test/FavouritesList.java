@@ -36,12 +36,12 @@ public class FavouritesList extends MenuOptions{
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        list = intent.getStringArrayListExtra("dates");
+        list = intent.getStringArrayListExtra("list");
 
         listView = (ListView) findViewById(R.id.listview);
         Button help = (Button) findViewById(R.id.help);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(FavouritesList.this, android.R.layout.simple_list_item_1, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(FavouritesList.this, android.R.layout.simple_list_item_1, android.R.id.text1, list);
         listView.setAdapter(adapter);
 
         help.setOnClickListener(new View.OnClickListener() {
