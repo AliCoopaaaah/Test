@@ -1,6 +1,7 @@
 package com.example.test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,12 +35,11 @@ public class FavouritesList extends MenuOptions{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DatabaseConnection connection = new DatabaseConnection(FavouritesList.this);
+        Intent intent = getIntent();
+        list = intent.getStringArrayListExtra("dates");
 
         listView = (ListView) findViewById(R.id.listview);
         Button help = (Button) findViewById(R.id.help);
-
-        list = connection.getImageDate();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(FavouritesList.this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);

@@ -2,17 +2,21 @@ package com.example.test;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +27,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -35,10 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends MenuOptions {
-
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle toggle;
+public class MainActivity extends MenuOptions implements NavigationView.OnNavigationItemSelectedListener {
     ImageView image;
     Bitmap bitmap;
     InputStream input1;
@@ -61,6 +65,15 @@ public class MainActivity extends MenuOptions {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawerlayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_closed);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigation = (NavigationView) findViewById(R.id.navigation);
+        navigation.setNavigationItemSelectedListener(this);
+
 
         TextView datePicked = (TextView) findViewById(R.id.datePicked);
         Button dateButton = (Button) findViewById(R.id.dateButton);
@@ -139,6 +152,7 @@ public class MainActivity extends MenuOptions {
                 popup.show();
             }
         });
+
     }//onCreate
 
     //-------------------------Saved Instances-------------------------
@@ -152,6 +166,41 @@ public class MainActivity extends MenuOptions {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    //-------------------------Navigation Drawer-------------------------
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.test);{
+            Toast.makeText(MainActivity.this, "A", Toast.LENGTH_SHORT).show();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return false;
+    }//onNavigationItemSelected
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }//onBackPressed
+
+    //-------------------------Intent-------------------------
+
+    public void changeActivity(){
+        ArrayList<String> dates = new ArrayList<>();
+        DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
+        dates = connection.getImageDate();
+
+        Intent intent = new Intent(MainActivity.this, FavouritesList.class);
+        intent.putExtra("dates", dates);
+        startActivity(intent);
     }
 
     //-------------------------URL Connection and AsyncTask-------------------------
