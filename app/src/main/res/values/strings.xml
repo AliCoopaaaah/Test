@@ -1,9 +1,55 @@
 <resources>
     <string name="app_name"></string>
-    <string name="question_mark">\?</string>
     <string name="title_activity_favourites_list"></string>
     <string name="first_fragment_label"></string>
     <string name="second_fragment_label"></string>
     <string name="nav_open">Open</string>
     <string name="nav_closed">Closed</string>
+    <string name="hello_blank_fragment"></string>
+
+    <!--Help Button-->
+    <string name="question_mark">\?</string>
+    <string name="home_help">Select the Spaceship icon from the toolbar to return to the Homepage</string>
+    <string name="exit_help">Select the exit icon from the toolbar to exit the app</string>
+    <string name="fact_help">Select the stars icon from the toolbar for space facts</string>
+    <string name="return_home">Return to Homepage</string>
+    <string name="home">Home</string>
+    <string name="exit">Exit</string>
+    <string name="facts">Space Facts</string>
+
+    <!--MainActivity-->
+    <string name="saved_to_favourites">URL Saved to Favourites</string>
+    <string name="main_help_1">Pick a date and select the SHOW IMAGE button to view an image</string>
+    <string name="main_help_2">Select the SAVE URL button to save image to favourites</string>
+    <string name="main_help_3">Select the SAVED IMAGES button to view a list of saved images</string>
+    <string name="main_help_4">Select the stars icon from the toolbar for space facts</string>
+
+    <!--activity_main.xml-->
+    <string name="date_format">YEAR-MONTH-DAY</string>
+    <string name="pick_date">Pick a Date</string>
+    <string name="show_image">Show Image</string>
+    <string name="save_url">Save URL</string>
+    <string name="saved_images">Saved Images</string>
+
+    <!--MainActivityPopup-->
+    <string name="main_view_image">How to View Image</string>
+    <string name="save_to_favourites">How to Save to Favourites</string>
+    <string name="view_favourite_list">How to View Favourites</string>
+
+    <!--FavouritesList-->
+    <string name="fav_help_1">Select a listed date to see the corresponding image</string>
+
+    <!--FavouritesPopup-->
+    <string name="view_images">How to View Image</string>
+
+    <!--FactsFragment-->
+    <string name="fact1">Triton, one of Neptune\'s moons, is the coldest known object in the solar system. It\'s average surface temperature is -391° F</string>
+    <string name="fact2">Sunsets on Mars are blue</string>
+    <string name="fact3">Mercury has a comet-like tail due to solar wind brushing sodium atoms from the planet\s surface</string>
+    <string name="fact4"></string>
+    <string name="fact5"></string>
+    <string name="fact_help_1">Select the NEW FACT button to view a new fact</string>
+
+    <!--fragment_facts.xml-->
+    <string name="fact_button">New Fact</string>
 </resources>

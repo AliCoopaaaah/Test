@@ -4,26 +4,20 @@
 
     <item
         android:id="@+id/home"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/spaceship"
         android:orderInCategory="100"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/savedImages"
-        android:title="Saved Images"
+        android:id="@+id/quiz"
+        android:title="@string/facts"
         android:icon="@drawable/stars"
         android:orderInCategory="200"
         app:showAsAction="always"/>
     <item
         android:id="@+id/exit"
-        android:title="Exit"
+        android:title="@string/exit"
         android:icon="@drawable/exit"
         android:orderInCategory="300"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/test"
-        android:title="TEST"
-        android:icon="@drawable/exit"
-        android:orderInCategory="300"
-        app:showAsAction="never"/>
 </menu>

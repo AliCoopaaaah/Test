@@ -28,10 +28,8 @@ public class MenuOptions extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.home){
             startActivity(new Intent(this, MainActivity.class));
-        } else if (item.getItemId()==R.id.savedImages) {
-            //Intent intent = new Intent(this, FavouritesList.class);
-            //intent.putExtra("list", list);
-            //startActivity(intent);
+        } else if (item.getItemId()==R.id.quiz) {
+            startActivity(new Intent(this, Facts.class));
         } else if (item.getItemId()==R.id.exit){
             ActivityCompat.finishAffinity(this);
         }

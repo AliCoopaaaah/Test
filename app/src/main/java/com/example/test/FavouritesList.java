@@ -1,9 +1,11 @@
 package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,12 +22,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class FavouritesList extends AppCompatActivity {
-    ArrayList<NasaObject> list;
+public class FavouritesList extends MenuOptions{
+    private ArrayList<NasaObject> list;
+    private NasaObject object;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites_list);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Button help = (Button) findViewById(R.id.help);
 
@@ -40,7 +46,11 @@ public class FavouritesList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                object = (NasaObject) listView.getItemAtPosition(position);
+                String hdURL = object.getHdURL();
 
+                Intent imageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(hdURL));
+                startActivity(imageIntent);
             }
         });
 
@@ -54,9 +64,13 @@ public class FavouritesList extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId()==R.id.viewImage){
-                            Toast.makeText(FavouritesList.this, "Click on a listed date to see the corresponding image", Toast.LENGTH_LONG).show();
+                            Toast.makeText(FavouritesList.this, R.string.fav_help_1, Toast.LENGTH_LONG).show();
                         } else if (item.getItemId()==R.id.home) {
-                            Toast.makeText(FavouritesList.this, "Click on the Spaceship icon to return to the Homepage", Toast.LENGTH_LONG).show();
+                            Toast.makeText(FavouritesList.this, R.string.home_help, Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.facts) {
+                            Toast.makeText(FavouritesList.this, R.string.fact_help, Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.exit) {
+                            Toast.makeText(FavouritesList.this, R.string.exit_help, Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }

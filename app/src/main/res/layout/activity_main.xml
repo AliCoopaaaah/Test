@@ -13,7 +13,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/datePicked"
-                android:text="YEAR-MONTH-DAY"
+                android:text="@string/date_format"
                 android:textColor="@color/gray"
                 android:textSize="18dp"
                 android:gravity="center"
@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
             <Button
                 android:id="@+id/dateButton"
-                android:text="Pick a Date"
+                android:text="@string/pick_date"
                 android:textSize="18dp"
                 android:backgroundTint="@color/black"
                 android:layout_marginTop="5dp"
@@ -43,7 +43,7 @@
 
                 <Button
                     android:id="@+id/show"
-                    android:text="Show Image"
+                    android:text="@string/show_image"
                     android:textSize="18dp"
                     android:backgroundTint="@color/blue"
                     android:layout_marginLeft="52dp"
@@ -52,7 +52,7 @@
                     app:cornerRadius="0dp"/>
                 <Button
                     android:id="@+id/save"
-                    android:text="Save URL"
+                    android:text="@string/save_url"
                     android:textSize="18dp"
                     android:backgroundTint="@color/blue"
                     android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
             </LinearLayout>
             <Button
                 android:id="@+id/viewFavourites"
-                android:text="Saved Images"
+                android:text="@string/saved_images"
                 android:textSize="18dp"
                 android:backgroundTint="@color/black"
                 android:layout_marginTop="5dp"

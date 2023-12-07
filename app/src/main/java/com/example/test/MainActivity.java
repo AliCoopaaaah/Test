@@ -12,10 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,21 +49,21 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends MenuOptions{
-    ImageView image;
-    Bitmap bitmap;
-    InputStream input1;
+    private ImageView image;
+    private Bitmap bitmap;
+    private InputStream input1;
 
     //dates to be appended to the URL
-    int URLyear = 1996;
-    int URLmonth = 3;
-    int URLday = 25;
-    String URLdate;
+    private int URLyear = 1996;
+    private int URLmonth = 3;
+    private int URLday = 25;
+    private String URLdate;
 
     //ArrayList and String variables to be sent between activities
-    String savedURL;
-    String hdURL = "kgjsdfhskghjqa";
-    ArrayList<NasaObject> list;
-    NasaObject object;
+    private String savedURL;
+    private String hdURL = "https://apod.nasa.gov/apod/image/2303/_GHR3094-venerelunafirma.jpg";
+    private ArrayList<NasaObject> list;
+    private NasaObject object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class MainActivity extends MenuOptions{
                             @Override
                             public void onDateSet(DatePicker view, int thisyear, int monthOfYear, int dayOfMonth) {
                                 URLyear = thisyear;
-                                URLmonth = monthOfYear;
+                                URLmonth = monthOfYear + 1;
                                 URLday = dayOfMonth;
                                 datePicked.setText(thisyear+"-"+(monthOfYear+1)+"-"+dayOfMonth);
                             }
@@ -111,7 +113,7 @@ public class MainActivity extends MenuOptions{
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
+                URLdate = (URLyear+"-"+URLmonth+"-"+URLday).toString();
                 NASAImages nasa = new NASAImages();
                 nasa.execute();
             }
@@ -121,10 +123,10 @@ public class MainActivity extends MenuOptions{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
+                URLdate = (URLyear+"-"+URLmonth+"-"+URLday).toString();
                 object = new NasaObject(URLdate, hdURL);
                 list.add(object);
-                Toast.makeText(MainActivity.this, "URL Saved to Favourites", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.saved_to_favourites, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,11 +150,15 @@ public class MainActivity extends MenuOptions{
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId()==R.id.imageHelp){
-                            Toast.makeText(MainActivity.this, "Pick a date and select the 'Show Image' button to view an image", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, R.string.main_help_1, Toast.LENGTH_LONG).show();
                         } else if (item.getItemId()==R.id.saveTo) {
-                            Toast.makeText(MainActivity.this, "Select the 'Save URL' button to save image to favourites", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, R.string.main_help_2, Toast.LENGTH_LONG).show();
                         } else if (item.getItemId()==R.id.viewlist){
-                            Toast.makeText(MainActivity.this, "Select the 'Favourites List' (Stars Icon) option from the toolbar to view a list of saved images", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, R.string.main_help_3, Toast.LENGTH_LONG).show();
+                        }else if (item.getItemId()==R.id.facts){
+                            Toast.makeText(MainActivity.this, R.string.fact_help, Toast.LENGTH_LONG).show();
+                        } else if (item.getItemId()==R.id.exit){
+                            Toast.makeText(MainActivity.this, R.string.exit_help, Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
@@ -164,19 +170,19 @@ public class MainActivity extends MenuOptions{
     }//onCreate
 
     //-------------------------Saved Instances-------------------------
-    /*
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList("list", list);
         super.onSaveInstanceState(outState);
-    }
+    }//onSavedInstanceState
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
-    }
-    */
+        list = savedInstanceState.getParcelableArrayList("list");
+    }//onRestoreInstanceState
+
     //-------------------------URL Connection and AsyncTask-------------------------
     public void URLConnection() throws IOException {
         HttpURLConnection connection;
@@ -210,6 +216,7 @@ public class MainActivity extends MenuOptions{
                 input2 = connection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(input2);
 
+                hdURL = jsonObject.getString("hdurl");
                 savedURL = urlValue.toString();
             } catch(MalformedURLException e){
                 throw new RuntimeException(e);

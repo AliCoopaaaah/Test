@@ -2,14 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/imageHelp"
-        android:title="How to View Image"
+        android:title="@string/main_view_image"
         />
     <item
         android:id="@+id/saveTo"
-        android:title="How to Save to Favourites"
+        android:title="@string/save_to_favourites"
         />
     <item
         android:id="@+id/viewlist"
-        android:title="How to View Favourites"
+        android:title="@string/view_favourite_list"
+        />
+    <item
+        android:id="@+id/facts"
+        android:title="@string/facts"
+        />
+    <item
+        android:id="@+id/exit"
+        android:title="@string/exit"
         />
 </menu>

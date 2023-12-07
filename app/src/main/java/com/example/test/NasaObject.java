@@ -8,7 +8,7 @@ public class NasaObject implements Parcelable {
     private String hdURL;
     private String date;
 
-
+    //constructor
     public NasaObject(String date, String hdURL) {
         this.hdURL = hdURL;
         this.date = date;
