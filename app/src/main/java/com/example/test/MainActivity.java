@@ -60,7 +60,8 @@ public class MainActivity extends MenuOptions{
     //ArrayList and String variables to be sent between activities
     String savedURL;
     String hdURL = "kgjsdfhskghjqa";
-    ArrayList<String> list;
+    ArrayList<NasaObject> list;
+    NasaObject object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class MainActivity extends MenuOptions{
         Button viewFavourites = (Button) findViewById(R.id.viewFavourites);
         Button help = (Button) findViewById(R.id.help);
 
-        list = new ArrayList<String>();
+        list = new ArrayList<NasaObject>();
 
         //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +122,8 @@ public class MainActivity extends MenuOptions{
             @Override
             public void onClick(View v) {
                 URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
-                list.add(URLdate);
+                object = new NasaObject(URLdate, hdURL);
+                list.add(object);
                 Toast.makeText(MainActivity.this, "URL Saved to Favourites", Toast.LENGTH_SHORT).show();
             }
         });
