@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -43,6 +44,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends MenuOptions{
     ImageView image;
@@ -58,8 +60,7 @@ public class MainActivity extends MenuOptions{
     //ArrayList and String variables to be sent between activities
     String savedURL;
     String hdURL = "kgjsdfhskghjqa";
-    ArrayList<NasaObject> list;
-    ArrayList<String> displayDates;
+    ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +74,11 @@ public class MainActivity extends MenuOptions{
         Button dateButton = (Button) findViewById(R.id.dateButton);
         Button show = (Button) findViewById(R.id.show);
         Button save = (Button) findViewById(R.id.save);
-        Button help = (Button) findViewById(R.id.help);
         image = (ImageView) findViewById(R.id.image);
+        Button viewFavourites = (Button) findViewById(R.id.viewFavourites);
+        Button help = (Button) findViewById(R.id.help);
 
-        list = new ArrayList<>();
-
-        displayDates = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, displayDates);
-
-        ListView listView = (ListView) findViewById(R.id.listview);
-        listView.setAdapter(adapter);
+        list = new ArrayList<String>();
 
         //get date from user
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -124,13 +120,19 @@ public class MainActivity extends MenuOptions{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
-                //connection.addImage(URLdate, hdURL);
-
-                displayDates.add(URLdate);
-                adapter.notifyDataSetChanged();
-
+                URLdate = (URLyear+"-"+(URLmonth+1)+"-"+URLday).toString();
+                list.add(URLdate);
                 Toast.makeText(MainActivity.this, "URL Saved to Favourites", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //change activity to favourites lsit
+        viewFavourites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FavouritesList.class);
+                intent.putExtra("list", list);
+                startActivity(intent);
             }
         });
 
@@ -160,6 +162,7 @@ public class MainActivity extends MenuOptions{
     }//onCreate
 
     //-------------------------Saved Instances-------------------------
+    /*
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList("list", list);
@@ -171,7 +174,7 @@ public class MainActivity extends MenuOptions{
        list = savedInstanceState.getParcelableArrayList("list");
        super.onRestoreInstanceState(savedInstanceState);
     }
-
+    */
     //-------------------------URL Connection and AsyncTask-------------------------
     public void URLConnection() throws IOException {
         HttpURLConnection connection;
