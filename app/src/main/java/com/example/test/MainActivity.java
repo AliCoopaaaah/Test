@@ -136,6 +136,11 @@ public class MainActivity extends MenuOptions{
                 URLdate = (URLyear+"-"+URLmonth+"-"+URLday).toString();
                 object = new NasaObject(URLdate, name, hdURL);
                 list.add(object);
+
+                //---commented out because it doesn't work---
+                //DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
+                //connection.addImage(URLdate, name, hdURL);
+
                 Toast.makeText(MainActivity.this, R.string.saved_to_favourites, Toast.LENGTH_SHORT).show();
             }
         });
