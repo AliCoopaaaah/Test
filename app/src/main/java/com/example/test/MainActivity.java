@@ -27,6 +27,7 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -60,6 +61,7 @@ public class MainActivity extends MenuOptions{
     private String URLdate;
 
     //ArrayList and String variables to be sent between activities
+    private String name;
     private String savedURL;
     private String hdURL = "https://apod.nasa.gov/apod/image/2303/_GHR3094-venerelunafirma.jpg";
     private ArrayList<NasaObject> list;
@@ -78,6 +80,7 @@ public class MainActivity extends MenuOptions{
         Button show = (Button) findViewById(R.id.show);
         Button save = (Button) findViewById(R.id.save);
         image = (ImageView) findViewById(R.id.image);
+        EditText editText = (EditText) findViewById(R.id.edittext);
         Button viewFavourites = (Button) findViewById(R.id.viewFavourites);
         Button help = (Button) findViewById(R.id.help);
 
@@ -123,8 +126,15 @@ public class MainActivity extends MenuOptions{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(editText.getText().toString().equals("")){
+                    name = "Saved Image";
+                }else {
+                    name = editText.getText().toString();
+                }
+                editText.getText().clear();
                 URLdate = (URLyear+"-"+URLmonth+"-"+URLday).toString();
-                object = new NasaObject(URLdate, hdURL);
+                object = new NasaObject(URLdate, name, hdURL);
                 list.add(object);
                 Toast.makeText(MainActivity.this, R.string.saved_to_favourites, Toast.LENGTH_SHORT).show();
             }

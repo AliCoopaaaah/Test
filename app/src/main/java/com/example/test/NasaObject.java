@@ -6,24 +6,28 @@ import android.os.Parcelable;
 public class NasaObject implements Parcelable {
 
     private String hdURL;
+    private String name;
     private String date;
 
     //constructor
-    public NasaObject(String date, String hdURL) {
-        this.hdURL = hdURL;
+    public NasaObject(String date, String name, String hdURL) {
         this.date = date;
+        this.name = name;
+        this.hdURL = hdURL;
     }
 
     // implementing parcelable interface
     protected NasaObject(Parcel in) {
         hdURL = in.readString();
         date = in.readString();
+        name = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(hdURL);
         dest.writeString(date);
+        dest.writeString(name);
     }
 
     @Override
@@ -58,5 +62,11 @@ public class NasaObject implements Parcelable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
     }
 }

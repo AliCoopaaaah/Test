@@ -112,7 +112,9 @@ public class FavouritesList extends MenuOptions{
                 view = inflater.inflate(R.layout.list_item, null);
             }
 
+            TextView itemName = (TextView)view.findViewById(R.id.itemName);
             TextView textView = (TextView) view.findViewById(R.id.textview);
+            itemName.setText(list.get(i).getName());
             textView.setText(list.get(i).getDate());
 
             return view;

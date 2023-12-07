@@ -49,12 +49,14 @@ public class FactsFragment extends Fragment {
                     textView.setText(R.string.fact1);
                 } else if (number==2) {
                     textView.setText(R.string.fact2);
-                }else if (number==3) {
+                } else if (number==3) {
                     textView.setText(R.string.fact3);
-                }else if (number==4) {
+                } else if (number==4) {
                     textView.setText(R.string.fact4);
-                }else if (number==5) {
+                } else if (number==5) {
                     textView.setText(R.string.fact5);
+                } else if (number==6) {
+                    textView.setText(R.string.fact6);
                     number=0;
                 }
             }

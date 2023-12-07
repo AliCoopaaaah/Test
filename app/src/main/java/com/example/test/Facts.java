@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-public class Facts extends AppCompatActivity {
+public class Facts extends MenuOptions {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
