@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name"></string>
+<string name="title_activity_favourites_list"></string>
+<string name="first_fragment_label"></string>
+<string name="second_fragment_label"></string>
+<string name="nav_open">Open</string>
+<string name="nav_closed">Closed</string>
+<string name="hello_blank_fragment"></string>
+
+<!--Help Button-->
+<string name="question_mark">\?</string>
+<string name="home_help">
+Sélectionnez l\'icône Vaisseau spatial dans la barre d\'outils pour revenir à la page d\'accueil</string>
+<string name="exit_help">Sélectionnez l\'icône de sortie dans la barre d\'outils pour quitter l\'application</string>
+<string name="fact_help">Sélectionnez l\'icône des étoiles dans la barre d\'outils pour les faits spatiaux</string>
+<string name="return_home">Retour à la page d\'accueil</string>
+<string name="home">Menu d\'accueil</string>
+<string name="exit">Quitter</string>
+<string name="facts">Faits sur l\'espace</string>
+
+<!--MainActivity-->
+<string name="saved_to_favourites">URL enregistrée dans les favoris</string>
+<string name="main_help_1">Choisissez une date et sélectionnez le bouton AFFICHER L\'IMAGE pour afficher une image</string>
+<string name="main_help_2">Sélectionnez le bouton ENREGISTRER l\'URL pour enregistrer l\'image dans les favoris</string>
+<string name="main_help_3">Sélectionnez le bouton IMAGES SAUVEGARDÉES pour afficher une liste des images enregistrées</string>
+<string name="main_help_4">Sélectionnez l\'icône des étoiles dans la barre d\'outils pour les faits spatiaux</string>
+
+<!--activity_main.xml-->
+<string name="date_format">ANNÉE-MOIS-JOUR</string>
+<string name="pick_date">Choisis une date</string>
+<string name="show_image">Afficher l\'image</string>
+<string name="save_url">Enregistrer l\'URL</string>
+<string name="saved_images">Images enregistrées</string>
+
+<!--MainActivityPopup-->
+<string name="main_view_image">Comment afficher l\'image</string>
+<string name="save_to_favourites">Comment enregistrer dans les favoris</string>
+<string name="view_favourite_list">Comment afficher les favoris</string>
+
+<!--FavouritesList-->
+<string name="fav_help_1">Sélectionnez une date répertoriée pour voir l\'image correspondante</string>
+
+<!--FavouritesPopup-->
+<string name="view_images">Comment afficher l\'image</string>
+
+<!--FactsFragment-->
+<string name="fact1">Triton, l\'une des lunes de Neptune, est l\'objet le plus froid connu du système solaire. La température moyenne de la surface est de -391° F</string>
+<string name="fact2">Les couchers de soleil sur Mars sont bleus</string>
+<string name="fact3">Mercure a une queue semblable à une comète, en raison du vent solaire qui repousse les atomes de sodium de la surface de la planète</string>
+<string name="fact4">Notre Soleil fusionne environ 600 millions de tonnes d\’hydrogène chaque seconde</string>
+<string name="fact5">Les quasars, lumière émise par des trous noirs consommant de grandes quantités de gaz, sont les objets spatiaux les plus brillants connus</string>
+<string name="fact6">Notre Lune est en forme de citron</string>
+<string name="fact_help_1">Sélectionnez le bouton NOUVEAU FAIT pour afficher un nouveau fait</string>
+
+<!--fragment_facts.xml-->
+<string name="fact_button">Nouveau fait</string>
+</resources>
