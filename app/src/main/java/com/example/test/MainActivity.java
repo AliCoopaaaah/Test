@@ -29,8 +29,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import android.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends MenuOptions{
+public class MainActivity extends MenuOptions /*implements NavigationView.OnNavigationItemSelectedListener*/{
     private ImageView image;
     private Bitmap bitmap;
     private InputStream input1;
@@ -64,6 +68,17 @@ public class MainActivity extends MenuOptions{
         EditText editText = (EditText) findViewById(R.id.edittext);
         Button viewFavourites = (Button) findViewById(R.id.viewFavourites);
         Button help = (Button) findViewById(R.id.help);
+
+        //including this crashes the app
+        /*
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_closed);
+
+        drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);*/
 
         list = new ArrayList<NasaObject>();
 
@@ -188,6 +203,19 @@ public class MainActivity extends MenuOptions{
         connection.connect();
         input1 = connection.getInputStream();
     }//URLConnection()
+
+   //-------------------------URL Connection and AsyncTask-------------------------
+   //including this crashes the app
+    /*
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item==R.id.testItem){
+            Toast.makeText(MainActivity.this, "You Clicked Test Item", Toast.LENGTH_LONG).show();
+        }
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }*/
 
     class NASAImages extends AsyncTask<String, Integer, Bitmap> {
         HttpURLConnection connection;

@@ -7,13 +7,47 @@
     tools:context=".Facts">
 
     <include layout="@layout/toolbar"/>
-    <FrameLayout
-        android:id="@+id/frame"
-        android:layout_marginTop="75dp"
+    <LinearLayout
+        android:id="@+id/textcontainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        android:background="@color/blue"
+        android:layout_marginTop="93dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:text="Space Facts"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/factcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@drawable/space"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textcontainer">
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/factcontainer">
+    </LinearLayout>
     <Button
         android:id="@+id/help"
         android:text="@string/question_mark"
