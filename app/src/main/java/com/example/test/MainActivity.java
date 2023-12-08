@@ -2,40 +2,22 @@ package com.example.test;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -47,7 +29,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class MainActivity extends MenuOptions{
     private ImageView image;
@@ -138,7 +119,7 @@ public class MainActivity extends MenuOptions{
                 list.add(object);
 
                 //---commented out because it doesn't work---
-                //DatabaseConnection connection = new DatabaseConnection(MainActivity.this);
+                //DBConnection connection = new DBConnection(MainActivity.this);
                 //connection.addImage(URLdate, name, hdURL);
 
                 Toast.makeText(MainActivity.this, R.string.saved_to_favourites, Toast.LENGTH_SHORT).show();

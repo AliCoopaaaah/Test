@@ -1,8 +1,6 @@
 package com.example.test;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,6 +33,10 @@ public class FavouritesList extends MenuOptions{
         Button help = (Button) findViewById(R.id.help);
 
         list = (ArrayList<NasaObject>)getIntent().getSerializableExtra("list");
+
+        //---commented out because it doesn't work---
+        //DBConnection connection = new DBConnection(FavouritesList.this);
+        //dbList = connection.getImageInfo();
 
         MyAdapter adapter = new MyAdapter(FavouritesList.this, list);
 

@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
 
 public class DBConnection extends SQLiteOpenHelper {
@@ -15,20 +13,22 @@ public class DBConnection extends SQLiteOpenHelper {
     private static final int DBVersion = 1;
     private static final String TableName = "savedimages";
     private static final String id = "id";
+    private static final String name = "name";
     private static final String date = "date";
     private static final String url = "url";
 
     String createTable = "CREATE TABLE "+TableName+" ("+id+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            date+" TEXT)";
+            name+"TEXT, "+date+" TEXT)";
 
     public DBConnection(Context context){
         super(context, DBName, null, DBVersion);
     }
 
-    public void addImage(String savedate, String saveurl){
+    public void addImage(String saveName, String savedate, String saveurl){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(name, saveName);
         values.put(date, savedate);
         values.put(url, saveurl);
 
@@ -46,14 +46,17 @@ public class DBConnection extends SQLiteOpenHelper {
         return results;
     }//getImages
 
-    public ArrayList<String> getImageDate(){
+    public ArrayList<NasaObject> getImageInfo(){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM "+ TableName;
         Cursor cursor = db.rawQuery(query, null);
-        ArrayList<String> dates = new ArrayList<String>();
+        ArrayList<NasaObject> dates = new ArrayList<NasaObject>();
         while(cursor.moveToNext()){
-            String date = cursor.getString(1);
-            dates.add(date);
+            String name = cursor.getString(1);
+            String date = cursor.getString(2);
+            String url = cursor.getString(3);
+            NasaObject object = new NasaObject(date, name, url);
+            dates.add(object);
         }
         cursor.close();
         db.close();
